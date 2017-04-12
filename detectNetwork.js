@@ -13,23 +13,33 @@ var detectNetwork = function(cardNumber) {
   // The American Express network always starts with a 34 or 37 and is 15 digits long
 
   // Once you've read this, go ahead and try to implement this function, then return to the consle.o
-  var prefix = cardNumber.slice(0, 2);
+
+
+  var fourDigPrefix = cardNumber.slice(0, 4);
+  var threeDigPrefix = cardNumber.slice(0, 3);
+  var twoDigPrefix = cardNumber.slice(0, 2);
   var numLength = cardNumber.length;
 
   var visaLengths = [13, 16, 19];
-  var mcPres = [51, 52, 53, 54, 55];
+  var mcPres = ['51', '52', '53', '54', '55'];
+  var discPres = ['6011', '644', '645', '646', '647', '648', '649', '65'];
 
-  if ((prefix === '38' || prefix === '39') && numLength === 14) {
-  	return 'Diner\'s Club';
+  if ((twoDigPrefix === '38' || twoDigPrefix === '39') && numLength === 14) {
+    return 'Diner\'s Club';
   }
-  if ((prefix === '34' || prefix === '37') && numLength === 15) {
+  if ((twoDigPrefix === '34' || twoDigPrefix === '37') && numLength === 15) {
   	return 'American Express';
   }
-  if ((prefix[0] === '4') && visaLengths.indexOf(numLength) > -1) {
+  if ((cardNumber[0] === '4') && visaLengths.indexOf(numLength) > -1) {
   	return 'Visa';
   }
-  if ((mcPres.indexOf(+prefix) > -1) && numLength === 16) {
+  if ((mcPres.indexOf(twoDigPrefix) > -1) && numLength === 16) {
   	return 'MasterCard';
+  }
+  if (discPres.indexOf(fourDigPrefix) > -1 || discPres.indexOf(threeDigPrefix) > -1 || discPres.indexOf(twoDigPrefix) > -1) {
+    if (numLength === 16 || numLength === 19) {
+      return 'Discover';
+    }
   }
 };
 
