@@ -16,11 +16,20 @@ var detectNetwork = function(cardNumber) {
   var prefix = cardNumber.slice(0, 2);
   var numLength = cardNumber.length;
 
+  var visaLengths = [13, 16, 19];
+  var mcPres = [51, 52, 53, 54, 55];
+
   if ((prefix === '38' || prefix === '39') && numLength === 14) {
   	return 'Diner\'s Club';
   }
   if ((prefix === '34' || prefix === '37') && numLength === 15) {
   	return 'American Express';
+  }
+  if ((prefix[0] === '4') && visaLengths.indexOf(numLength) > -1) {
+  	return 'Visa';
+  }
+  if ((mcPres.indexOf(+prefix) > -1) && numLength === 16) {
+  	return 'MasterCard';
   }
 };
 
