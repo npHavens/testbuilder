@@ -23,6 +23,7 @@ var detectNetwork = function(cardNumber) {
   var visaLengths = [13, 16, 19];
   var mcPres = ['51', '52', '53', '54', '55'];
   var discPres = ['6011', '644', '645', '646', '647', '648', '649', '65'];
+  var maesPres = ['5018', '5020', '5038', '6304'];
 
   if ((twoDigPrefix === '38' || twoDigPrefix === '39') && numLength === 14) {
     return 'Diner\'s Club';
@@ -40,6 +41,9 @@ var detectNetwork = function(cardNumber) {
     if (numLength === 16 || numLength === 19) {
       return 'Discover';
     }
+  }
+  if ((maesPres.indexOf(fourDigPrefix) > -1) && numLength >= 12 && numLength <= 19) {
+    return 'Maestro';
   }
 };
 
