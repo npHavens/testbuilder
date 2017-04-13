@@ -28,21 +28,27 @@ var detectNetwork = function(cardNumber) {
   if ((twoDigPrefix === '38' || twoDigPrefix === '39') && numLength === 14) {
     return 'Diner\'s Club';
   }
+
   if ((twoDigPrefix === '34' || twoDigPrefix === '37') && numLength === 15) {
   	return 'American Express';
   }
+
   if ((cardNumber[0] === '4') && visaLengths.indexOf(numLength) > -1) {
   	return 'Visa';
   }
+
   if ((mcPres.indexOf(twoDigPrefix) > -1) && numLength === 16) {
   	return 'MasterCard';
   }
+
   if (discPres.indexOf(fourDigPrefix) > -1 || discPres.indexOf(threeDigPrefix) > -1 || discPres.indexOf(twoDigPrefix) > -1) {
     if (numLength === 16 || numLength === 19) {
       return 'Discover';
     }
   }
+
   if ((maesPres.indexOf(fourDigPrefix) > -1) && numLength >= 12 && numLength <= 19) {
+          console.log(cardNumber);
     return 'Maestro';
   }
 };

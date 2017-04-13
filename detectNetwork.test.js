@@ -163,27 +163,55 @@ describe('Discover', function() {
       })
     })(prefix);
   }
+ 
+  it('has a prefix of 65 and a length of 16', function() {
+    detectNetwork('6511123456789123').should.equal('Discover');
+  });
 
-  // it('has a prefix of 644 and a length of 16', function() {
-  //   detectNetwork('6441234567891234').should.equal('Discover');
-  // });
+  it('has a prefix of 65 and a length of 19', function() {
+    detectNetwork('6511123456789123456').should.equal('Discover');
+  });
 
-  // it('has a prefix of 645 and a length of 16', function() {
-  //   detectNetwork('6441234567891234').should.equal('Discover');
-  // });
-
-  // it('has a prefix of 646 and a length of 16', function() {
-  //   detectNetwork('6441234567891234').should.equal('Discover');
-  // });
-
-  // it('has a prefix of 647 and a length of 16', function() {
-  //   detectNetwork('6441234567891234').should.equal('Discover');
-  // });
 });
 
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
-});
+  for (var len = 12; len <= 19; len++) {
+    var i = len - 11;
+    (function(len) {
+      it('has a prefix of 5018 and a length of ' + len, function () {
+        detectNetwork('501812345678' + '0'.repeat(i)).should.equal('Maestro');
+      })
+    })(len);
+  }
+
+  for (var len = 12; len <= 19; len++) {
+    var i = len - 12;
+    (function(len) {
+      it('has a prefix of 5020 and a length of ' + len, function () {
+        detectNetwork('502012345678' + '0'.repeat(i)).should.equal('Maestro');
+      })
+    })(len);
+  }
+
+  for (var len = 12; len <= 19; len++) {
+    var i = len - 12;
+    (function(len) {
+      it('has a prefix of 5038 and a length of ' + len, function () {
+        detectNetwork('503812345678' + '0'.repeat(i)).should.equal('Maestro');
+      })
+    })(len);
+  }
+  
+  for (var len = 12; len <= 19; len++) {
+    var i = len - 12;
+    (function(len) {
+      it('has a prefix of 6304 and a length of ' + len, function () {
+        detectNetwork('630412345678' + '0'.repeat(i)).should.equal('Maestro');
+      })
+    })(len);
+  }
+
+});5018123456780000000
 
 describe('should support China UnionPay')
 describe('should support Switch')
