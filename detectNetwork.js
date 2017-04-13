@@ -26,6 +26,8 @@ var detectNetwork = function(cardNumber) {
   var maesPres = ['5018', '5020', '5038', '6304'];
   var cupPres = ['624', '625', '626'];
   var cupLengths = [16, 17, 18, 19];
+  var switchPres = ['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
+  var switchLengths = [16, 18, 19];
 
   for (var i = 622126; i <= 622925; i++) {
     cupPres.push(i + '');
@@ -41,6 +43,12 @@ var detectNetwork = function(cardNumber) {
 
   if ((twoDigPrefix === '34' || twoDigPrefix === '37') && numLength === 15) {
   	return 'American Express';
+  }
+
+  if (switchPres.indexOf(sixDigPrefix) > -1 || switchPres.indexOf(fourDigPrefix) > -1) {
+    if (switchLengths.indexOf(numLength) > -1) {
+      return 'Switch';
+    }
   }
 
   if ((cardNumber[0] === '4') && visaLengths.indexOf(numLength) > -1) {
