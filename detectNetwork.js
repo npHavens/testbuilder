@@ -48,7 +48,6 @@ var detectNetwork = function(cardNumber) {
   }
 
   if ((maesPres.indexOf(fourDigPrefix) > -1) && numLength >= 12 && numLength <= 19) {
-          console.log(cardNumber);
     return 'Maestro';
   }
 };
