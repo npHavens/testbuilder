@@ -149,9 +149,7 @@ describe('Discover', function() {
   });
 
   for (var prefix = 644; prefix <= 649; prefix++) {
-
     (function(prefix) {
-
       it('has a prefix of ' + prefix + ' and a length of 16', function() {
         detectNetwork(prefix + '1234567891234').should.equal('Discover');
       })
@@ -159,7 +157,6 @@ describe('Discover', function() {
       it('has a prefix of ' + prefix + ' and a length of 19', function() {
         detectNetwork(prefix + '1234567891234567').should.equal('Discover');
       })
-
     })(prefix);
   }
  
@@ -205,7 +202,7 @@ describe('China UnionPay', function() {
   for (var len = 16; len <= 19; len++) {
     (function(len) {    
       for (var prefix = 622126; prefix <= 622925; prefix++) {
-        (function(prefix1) {         
+        (function(prefix) {         
           it('has a prefix of ' + prefix + ' and a length of ' + len, function() {
             detectNetwork(prefix + '1234567891' + '0'.repeat(len - 16));
           })
@@ -234,4 +231,22 @@ describe('China UnionPay', function() {
 
 });
 
-describe('should support Switch')
+describe('Switch', function() {
+  var pres = ['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
+  var lengths = [16, 18, 19];
+
+  for (var i = 0; i < lengths.length; i++) {
+    (function(i) {    
+      for (var j = 0; j < pres.length; j++) {
+        (function(j) {         
+          it('has a prefix of ' + pres[j] + ' and a length of ' + lengths[i], function() {
+            detectNetwork(pres[j] + '1234567891' + '0'.repeat(lengths[i] - pres[j].length - 10));
+          })
+        })(j)
+      }
+
+    })(i);
+
+  }  
+
+})
