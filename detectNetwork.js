@@ -14,7 +14,7 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the consle.o
 
-
+  var sixDigPrefix = cardNumber.slice(0, 6);
   var fourDigPrefix = cardNumber.slice(0, 4);
   var threeDigPrefix = cardNumber.slice(0, 3);
   var twoDigPrefix = cardNumber.slice(0, 2);
@@ -24,6 +24,16 @@ var detectNetwork = function(cardNumber) {
   var mcPres = ['51', '52', '53', '54', '55'];
   var discPres = ['6011', '644', '645', '646', '647', '648', '649', '65'];
   var maesPres = ['5018', '5020', '5038', '6304'];
+  var cupPres = ['624', '625', '626'];
+  var cupLengths = [16, 17, 18, 19];
+
+  for (var i = 622126; i <= 622925; i++) {
+    cupPres.push(i + '');
+  }
+
+  for (var i = 6282; i <= 6288; i++) {
+    cupPres.push(i + '');
+  }
 
   if ((twoDigPrefix === '38' || twoDigPrefix === '39') && numLength === 14) {
     return 'Diner\'s Club';
@@ -50,6 +60,11 @@ var detectNetwork = function(cardNumber) {
   if ((maesPres.indexOf(fourDigPrefix) > -1) && numLength >= 12 && numLength <= 19) {
     return 'Maestro';
   }
+
+  if (cupPres.indexOf(sixDigPrefix) > -1 || cupPres.indexOf(fourDigPrefix) > -1 || cupPres.indexOf(threeDigPrefix) > -1) {
+    if (cupLengths.indexOf(numLength) > -1) {
+      return 'China UnionPay';
+    }
+  }
+
 };
-
-
