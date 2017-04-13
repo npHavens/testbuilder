@@ -153,14 +153,11 @@ describe('Discover', function() {
       it('has a prefix of ' + prefix + ' and a length of 16', function () {
         detectNetwork(prefix + '1234567891234').should.equal('Discover');
       })
-    })(prefix);
-  }
 
-  for (var prefix = 644; prefix <= 649; prefix++) {
-    (function(prefix) {
       it('has a prefix of ' + prefix + ' and a length of 19', function () {
         detectNetwork(prefix + '1234567891234567').should.equal('Discover');
       })
+
     })(prefix);
   }
  
@@ -175,43 +172,32 @@ describe('Discover', function() {
 });
 
 describe('Maestro', function() {
+
   for (var len = 12; len <= 19; len++) {
-    var i = len - 11;
+
     (function(len) {
+
       it('has a prefix of 5018 and a length of ' + len, function () {
-        detectNetwork('501812345678' + '0'.repeat(i)).should.equal('Maestro');
+        detectNetwork('501812345678' + '0'.repeat(len - 12)).should.equal('Maestro');
       })
-    })(len);
-  }
 
-  for (var len = 12; len <= 19; len++) {
-    var i = len - 12;
-    (function(len) {
       it('has a prefix of 5020 and a length of ' + len, function () {
-        detectNetwork('502012345678' + '0'.repeat(i)).should.equal('Maestro');
+        detectNetwork('502012345678' + '0'.repeat(len - 12)).should.equal('Maestro');
       })
-    })(len);
-  }
 
-  for (var len = 12; len <= 19; len++) {
-    var i = len - 12;
-    (function(len) {
       it('has a prefix of 5038 and a length of ' + len, function () {
-        detectNetwork('503812345678' + '0'.repeat(i)).should.equal('Maestro');
+        detectNetwork('503812345678' + '0'.repeat(len - 12)).should.equal('Maestro');
       })
-    })(len);
-  }
-  
-  for (var len = 12; len <= 19; len++) {
-    var i = len - 12;
-    (function(len) {
+
       it('has a prefix of 6304 and a length of ' + len, function () {
-        detectNetwork('630412345678' + '0'.repeat(i)).should.equal('Maestro');
+        detectNetwork('630412345678' + '0'.repeat(len - 12)).should.equal('Maestro');
       })
+
     })(len);
   }
 
-});5018123456780000000
+
+});
 
 describe('should support China UnionPay')
 describe('should support Switch')
